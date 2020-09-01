@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GoalComment = () => {
+function GoalComment () {
     return (
         <div>
             comment

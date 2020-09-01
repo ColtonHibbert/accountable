@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Goal = () => {
+function Goal() {
     return(
         <div>
             list goal here
