@@ -1,6 +1,6 @@
 import React from 'react';
 
-const List = (props) => {
+function List(props) {
     return(
         <div>
             <div>Goals</div>
