@@ -12,7 +12,7 @@ import {
     IS_LOGGED_IN,
     LOAD_USER,
     RESET_USER,
-} from './services/constants.js/index.js'
+} from './constants.js'
 
 
 

@@ -1,5 +1,5 @@
 import 'redux';
-import { store } from '../../../react-redux-plus-nav-starter/src/index.js';
+import { store } from '../index.js';
 import {
     DISPLAY_SIGN_UP_MODAL,
     DISPLAY_LOG_IN_MODAL,
@@ -13,8 +13,7 @@ import {
     IS_MOBILE,
     DISPLAY_MOBILE_MENU,
     UN_DISPLAY_MOBILE_MENU,
-} from './constants.js/index.js';
-
+} from './constants.js';
 
 
 export const displaySignUpModalAction = () => {
