@@ -1,5 +1,6 @@
 import 'redux';
 import { store } from '../index.js';
+import {useSelector, useDispatch, shallowEqual, useStore } from 'react-redux';
 import {
     DISPLAY_SIGN_UP_MODAL,
     DISPLAY_LOG_IN_MODAL,
@@ -17,9 +18,10 @@ import {
 
 
 export const displaySignUpModalAction = () => {
+    const { displaySignUpModal }  = useStore();
     return {
         type: DISPLAY_SIGN_UP_MODAL,
-        displaySignUpModalPayload: !store.getState().displaySignUpModal,
+        displaySignUpModalPayload: !displaySignUpModal,
     }
 }
 
