@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, useEffect } from 'react';
+//import logo from './logo.svg';
 import 'tachyons';
-import {useSelector, useDispatch } from 'react-redux';
-import { store } from '../index.js';
-import Navigation from '../components/Navigation.js' ;
-import SignUp from '../components/SignUp.js';
-import LogIn from '../components/LogIn';
-import MobileMenu from '../components/MobileMenu.js';
-import MobileMenuItem from '../components/MobileMenuItem.js';
-import { SearchFieldComponent, SEARCHFIELDCOMPONENTSTYLES } from '../components/SearchFieldComponent.js';
+import {useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { store } from './index.js';
+import Navigation from './components/Navigation.js' ;
+import SignUp from './components/SignUp.js';
+import LogIn from './components/LogIn';
+import MobileMenu from './components/MobileMenu.js';
+import MobileMenuItem from './components/MobileMenuItem.js';
+import { SearchFieldComponent, SEARCHFIELDCOMPONENTSTYLES } from './components/SearchFieldComponent.js';
 import debounce from 'lodash.debounce';
 import { 
   displaySignUpModalAction,
@@ -25,7 +25,7 @@ import {
   isMobileAction,
   displayMobileMenuAction,
   unDisplayMobileMenuAction,
-} from '../services/actions.js';
+} from './services/actions.js';
 
 
 /*const mapStateToProps = (state) => {
@@ -63,16 +63,25 @@ import {
 // 
 
 function App() {
+  const dispatch = useDispatch();
+  
+  const { displaySignUpModal, displayLogInModal, displayMobileMenu, loggedIn, name } = useSelector(state => ({
+    displaySignUpModal: state.displaySignUpModal,
+    displayLogInModal: state.displayLogInModal,
+    displayMobileMenu: state.displayMobileMenu,
+    loggedIn: state.loggedIn,
+    name: state.name
+  }), shallowEqual)
   
   const updateDimensions = debounce(() => {
       const minWidth = window.innerWidth;
       const greaterThanMobileWidth = 479;
       if(minWidth < greaterThanMobileWidth) {
-        store.dispatch(isMobileAction(true))
+        dispatch(isMobileAction(true))
       }
       if(minWidth > greaterThanMobileWidth) {
-        store.dispatch(isMobileAction(false))
-        store.dispatch(unDisplayMobileMenuAction(false))
+        dispatch(isMobileAction(false))
+        dispatch(unDisplayMobileMenuAction(false))
       }
     },100, {trailing: true})
   
@@ -80,62 +89,72 @@ function App() {
     this.updateDimensions();
     window.addEventListener("resize",this.updateDimensions)
   }*/
+  /*useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize",updateDimensions);
+    return () => {
+      window.removeEventListener('resize');
+    }
+  }*/
 
 
   
-  return(
+  return (
   <div className="min-vh-100 w-100 pa0 ma0 bg-light-blue relative">
     {
-      store.getState().displaySignUpModal ?  
+      displaySignUpModal ?  
       <SignUp 
-      displaySignUpModalAction={this.props.displaySignUpModalAction}
-      submitCryptedPasswordAction={this.props.submitCryptedPasswordAction}
-      submitEmailAction={this.props.submitEmailAction}
-      submitNameAction={this.props.submitNameAction}
-      sendSignUpAction={sendSignUpAction}
+      //displaySignUpModalAction={this.props.displaySignUpModalAction}
+      //submitCryptedPasswordAction={this.props.submitCryptedPasswordAction}
+      //submitEmailAction={this.props.submitEmailAction}
+      //submitNameAction={this.props.submitNameAction}
+      //sendSignUpAction={sendSignUpAction}
       /> : ''
     }
     {
-      store.getState().displayLogInModal ?
+      displayLogInModal ?
       <LogIn 
-      displayLogInModalAction={this.props.displayLogInModalAction}
-      submitEmailAction={this.props.submitEmailAction}
-      submitCryptedPasswordAction={this.props.submitCryptedPasswordAction}
-      sendLogIn={sendLogIn}
+      //displayLogInModalAction={this.props.displayLogInModalAction}
+      //submitEmailAction={this.props.submitEmailAction}
+      //submitCryptedPasswordAction={this.props.submitCryptedPasswordAction}
+      //sendLogIn={sendLogIn}
       /> : ''
     }
     <Navigation 
-      displaySignUpModalAction={this.props.displaySignUpModalAction}
-      displayLogInModalAction={this.props.displayLogInModalAction}
-      displayMobileMenuAction={this.props.displayMobileMenuAction}
-      signOut={this.props.signOut}
-      loggedIn={this.props.loggedIn}
-      isMobile={this.props.isMobile}
-      name={this.props.name}
+      //displaySignUpModalAction={this.props.displaySignUpModalAction}
+      //displayLogInModalAction={this.props.displayLogInModalAction}
+      //displayMobileMenuAction={this.props.displayMobileMenuAction}
+      //signOut={this.props.signOut}
+      //loggedIn={this.props.loggedIn}
+      //isMobile={this.props.isMobile}
+      //name={this.props.name}
     />
     {
-      store.getState().displayMobileMenu ? 
+      displayMobileMenu ? 
       <MobileMenu> 
         {
-        this.props.loggedIn ?
-            <div className="flex self-end white pa2">Welcome {this.props.name}</div>
+        loggedIn ?
+            <div className="flex self-end white pa2">Welcome {name}</div>
         : ''
         }
         <SearchFieldComponent 
-          submitSearchFieldAction={this.props.submitSearchFieldAction}
-          sendSearchFieldAction={sendSearchFieldAction}
-          buttonstyle={SEARCHFIELDCOMPONENTSTYLES.PRIMARYBUTTON}
-          searchfieldstyle={SEARCHFIELDCOMPONENTSTYLES.MOBILEMENUSEARCHFIELD}
+          //submitSearchFieldAction={this.props.submitSearchFieldAction}
+          //sendSearchFieldAction={sendSearchFieldAction}
+          //buttonstyle={SEARCHFIELDCOMPONENTSTYLES.PRIMARYBUTTON}
+          //searchfieldstyle={SEARCHFIELDCOMPONENTSTYLES.MOBILEMENUSEARCHFIELD}
         />
         <MobileMenuItem text="Featured Hikes" link="#featuredhikes"/>
         {
-          !this.props.loggedIn ?
+          !loggedIn ?
           <div className="w-100">
-            <MobileMenuItem text="Login" clickFunction={this.props.displayLogInModalAction}/>
-            <MobileMenuItem text="Sign Up" clickFunction={this.props.displaySignUpModalAction} />
+            <MobileMenuItem text="Login" //clickFunction={useDispatch(displayLogInModalAction)}
+            />
+            <MobileMenuItem text="Sign Up" //clickFunction={usedisplaySignUpModalAction} 
+            />
           </div>
           : 
-          <MobileMenuItem text="Sign Out" clickFunction={this.props.signOut} />
+          <MobileMenuItem text="Sign Out" //clickFunction={this.props.signOut} 
+          />
         }
         
       </MobileMenu>
@@ -143,7 +162,6 @@ function App() {
     }
   </div>
   )
-  
 }
 
 export default App;

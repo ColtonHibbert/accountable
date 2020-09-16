@@ -1,5 +1,5 @@
 import React from 'react';
-import { store } from './index.js/index.js';
+import { store } from '../index.js';
 
 
 export const Navigation = ({ displaySignUpModalAction, displayLogInModalAction, signOut, loggedIn, isMobile, displayMobileMenuAction, name }) => {
