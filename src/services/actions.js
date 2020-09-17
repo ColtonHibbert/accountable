@@ -20,7 +20,7 @@ import {
 export const displaySignUpModalAction = () => {
     //const { displaySignUpModal }  = useStore();
     console.log('displaysignupmodal')
-    console.log(store.getState())
+    //console.log(store.getState())
     return {
         type: DISPLAY_SIGN_UP_MODAL,
         displaySignUpModalPayload: !store.getState().displaySignUpModal,

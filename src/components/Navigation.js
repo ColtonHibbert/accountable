@@ -69,7 +69,7 @@ export function Navigation() {
                                 onClick={() => dispatch(displayLogInModalAction)}
                             >Log in</div>
                             <div className="link dim dark-gray f6 f5-l dib pointer" title="Sign up"
-                                onClick={() => dispatch(displaySignUpModalAction)}
+                                onClick={() => dispatch(displaySignUpModalAction())}
                             >Sign Up</div>
                         </div>
                     }
