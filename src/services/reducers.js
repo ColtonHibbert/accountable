@@ -34,6 +34,7 @@ const initialState = {
 
 export const reducer = (state=initialState, action= {}) => {
     if(action.type === DISPLAY_SIGN_UP_MODAL) {
+        console.log("reducer displaysignupmodalpayload")
         return {...state, displaySignUpModal: action.displaySignUpModalPayload }
     }
     if(action.type === DISPLAY_LOG_IN_MODAL) {
