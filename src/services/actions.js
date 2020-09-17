@@ -18,10 +18,12 @@ import {
 
 
 export const displaySignUpModalAction = () => {
-    const { displaySignUpModal }  = useStore();
+    //const { displaySignUpModal }  = useStore();
+    console.log('displaysignupmodal')
+    console.log(store.getState())
     return {
         type: DISPLAY_SIGN_UP_MODAL,
-        displaySignUpModalPayload: !displaySignUpModal,
+        displaySignUpModalPayload: !store.getState().displaySignUpModal,
     }
 }
 
