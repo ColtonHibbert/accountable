@@ -66,7 +66,7 @@ export function Navigation() {
                         <div className="flex">
                             <div
                             className="link dim dark-gray f6 f5-l dib mr3 mr4-l pointer" title="Log in"
-                                onClick={() => dispatch(displayLogInModalAction)}
+                                onClick={() => dispatch(displayLogInModalAction())}
                             >Log in</div>
                             <div className="link dim dark-gray f6 f5-l dib pointer" title="Sign up"
                                 onClick={() => dispatch(displaySignUpModalAction())}
